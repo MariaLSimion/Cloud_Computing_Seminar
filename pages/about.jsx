@@ -8,7 +8,7 @@ const About = () => {
     <div className="flex flex-col h-screen">
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-              <a href="http://localhost:3000/" class="flex items-center space-x-3 rtl:space-x-reverse">
+              <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcdGukF9JaWuBdyA3V5Nx0quqgdQ0VNzORh0rIlexkZg&s" class="h-8" alt="Virtual Shelf Logo" />
                 <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Virtual Shelf</span>
               </a>
