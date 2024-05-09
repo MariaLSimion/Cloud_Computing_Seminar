@@ -7,21 +7,41 @@ const MainPage = () => {
   const router = useRouter();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  const [filters, setFilters] = useState({});
+  const [selectedGenre, setSelectedGenre] = useState("");
+  const [selectedOwnership, setSelectedOwnership] = useState("");
+  const [selectedReadStatus, SetSelectedReadStatus] = useState("");
+  
 
 
   const fetchRecords = async () => {
     try {
       const response = await getRecords();
-      console.log(response);
-      setData(response);
+  
+      let filteredData = response;
+  
+      if (selectedGenre && selectedGenre !== "Filter by genre") {
+        // Filter records based on selected genre
+        filteredData = response.filter((record) => record.genre === selectedGenre);
+      }
+      if (selectedOwnership && selectedOwnership !== "Filter by ownership") {
+        // Filter records based on selected ownership status
+        filteredData = response.filter((record) => record.owned === selectedOwnership);
+      }
+
+      if (selectedReadStatus && selectedReadStatus !== "Filter by reading status") {
+        // Filter records based on selected reading status
+        filteredData = response.filter((record) => record.read === selectedReadStatus);
+      }
+
+  
+      setData(filteredData);
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setIsLoading(false);
     }
   };
+  
 
   const handleDeleteRecord = async (id) => {
     try {
@@ -40,31 +60,28 @@ const MainPage = () => {
   const handleEditRecord = (id) => {
     router.push(`/edit?id=${id}`);
   }
+  // const handleFilter = (e) => {
+  //   setSelectedGenre(e.target.value);
+  // };
 
-
-  const handleFilterChange = (filterType, value) => {
-    setFilters({ ...filters, [filterType]: value });
-};
-
-const filteredData = () => {
-    let filtered = data;
-    if (filters && filters.genre) {
-        filtered = filtered.filter(record => record.genre === filters.genre);
+  const handleFilter = (e, filterType) => {
+    if (filterType === "genre") {
+      setSelectedGenre(e.target.value);
+    } else if (filterType === "ownership") {
+      setSelectedOwnership(e.target.value);
     }
-    if (filters && filters.owned) {
-        filtered = filtered.filter(record => record.owned === filters.owned);
+    else if (filterType === "reading") {
+      SetSelectedReadStatus(e.target.value);
     }
-    if (filters && filters.read) {
-        filtered = filtered.filter(record => record.read === filters.read);
-    }
-    return filtered;
-};
-
-
+  };
+  
+  // useEffect(() => {
+  //   fetchRecords();
+  // }, []);
   useEffect(() => {
     fetchRecords();
-  }, []);
-
+  }, [selectedGenre,selectedOwnership, selectedReadStatus]);
+  
 
   if (isLoading) return <Spinner />;
 
@@ -109,19 +126,27 @@ const filteredData = () => {
 <div className="p-4 flex flex-wrap gap-4">
   
 <form class="max-w-sm mx-auto">
-  <label for="underline_select" class="sr-only">Underline select</label>
-  <select id="underline_select" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+  <label htmlFor="genre" 
+  className="sr-only">Underline select</label>
+  <select id="genre" 
+  value={selectedGenre}
+  onChange={(e) => handleFilter(e, "genre")}
+  className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
       <option selected>Filter by genre</option>
       <option value="Fantasy">Fantasy</option>
-      <option value="Mistery">Mistery</option>
+      <option value="Mystery">Mystery</option>
       <option value="Romance">Romance</option>
       <option value="Other">Other</option>
   </select>
 </form>
 
 <form class="max-w-sm mx-auto">
-  <label for="underline_select" class="sr-only">Underline select</label>
-  <select id="underline_select" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+  <label htmlFor="owned" 
+  className="sr-only">Underline select</label>
+  <select id="owned"
+   value={selectedOwnership}
+   onChange={(e) => handleFilter(e, "ownership")}
+  className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
       <option selected>Filter by ownership</option>
       <option value="Yes">Owned</option>
       <option value="No">Not owned</option>
@@ -129,11 +154,16 @@ const filteredData = () => {
 </form>
 
 <form class="max-w-sm mx-auto">
-  <label for="underline_select" class="sr-only">Underline select</label>
-  <select id="underline_select" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+  <label htmlFor="read" 
+  className="sr-only">Underline select</label>
+  <select id="read"
+  value={selectedReadStatus}
+  onChange={(e) => handleFilter(e, "reading")}
+  className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
       <option selected>Filter by reading status</option>
       <option value="Yes">Read</option>
       <option value="No">Not read</option>
+      <option value="Reading">Reading</option>
   </select>
 </form>
 </div>

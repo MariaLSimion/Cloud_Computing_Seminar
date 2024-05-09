@@ -111,7 +111,7 @@ const RecordForm = (props) => {
             htmlFor="read"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
-            Genre
+            Read
           </label>
           <select
             id="read"
@@ -122,7 +122,7 @@ const RecordForm = (props) => {
             <option value="">Did you read this book?</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
-            <option value="Reading now">Reading now</option>
+            <option value="Reading">Reading now</option>
           </select>
         </div>
         <div>
