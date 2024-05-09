@@ -1,6 +1,10 @@
 export const defaultRecordValues = {
-    name: '',
-    description: '',
+    title: '',
+    author: '',
+    genre: 'N/A',
+    read: 'N/A',
+    owned: 'N/A'
+
 }
 
 export const MAX_MEMORY = 3;

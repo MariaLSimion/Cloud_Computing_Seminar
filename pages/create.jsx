@@ -20,7 +20,10 @@ const Create = () => {
     }
   };
 
-  return <RecordForm entry={entry} onSubmit={onSubmit} />;
+   return <RecordForm entry={entry} onSubmit={onSubmit} />;
+  // return(
+  //   <div>Create</div>
+  // )
 };
 
 export default Create;
