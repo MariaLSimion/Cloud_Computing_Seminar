@@ -49,7 +49,7 @@ const Contact = () => {
   </div>
   <div href="#" className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Youtube presentation link</h5>
-    <a href="https://www.youtube.com" className="font-normal text-blue-500 hover:underline dark:text-gray-400">https://www.youtube.com</a>
+    <a href=" https://youtu.be/_aonSp_fzzw " className="font-normal text-blue-500 hover:underline dark:text-gray-400"> https://youtu.be/_aonSp_fzzw</a>
   </div>
   <div href="#" className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Vercel link</h5>
